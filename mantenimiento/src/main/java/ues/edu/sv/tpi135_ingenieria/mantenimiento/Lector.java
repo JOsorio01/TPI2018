@@ -74,16 +74,16 @@ public class Lector implements Serializable {
     return listaArchivosCSV;
   }
 
-  public List<List<String>> leerArchivo(List<String> listaArchivos) {
+  public List<List<String>> leerArchivo(List<String> listaArchivos, String separador, boolean saltarPrimeraLineas) {
     List<List<String>> cadena = new ArrayList<>(); //aqui se almacenan los objetos separados por comas de cada linea que contenga el archivo
     listaArchivos.forEach(l -> {
       try {
         if(saltarPrimeraLinea) {
           Stream<String> stream = Files.lines(Paths.get(l)).skip(1); //se obtiene el flujo de datos y se realiza un salto de linea
-          stream.forEach(a -> cadena.add(separador(a)));
+          stream.forEach(a -> cadena.add(separador(a, separador)));
         } else {
           Stream<String> stream = Files.lines(Paths.get(l)); //se obtiene el flujo de datos y se realiza un salto de linea
-          stream.forEach(a -> cadena.add(separador(a)));
+          stream.forEach(a -> cadena.add(separador(a, separador)));
         }  
       } catch (IOException ex) {
         Logger.getLogger(Lector.class.getName()).log(Level.SEVERE, null, ex);
@@ -93,7 +93,7 @@ public class Lector implements Serializable {
     return cadena;
   }
 
-  public List<String> separador(String linea) {
+  public List<String> separador(String linea, String separador) {
     if (!linea.trim().isEmpty()) {
       String[] separado = linea.split(separador); // separa la linea por comas
       List<String> listaSeparado = new ArrayList<>(Arrays.asList(separado));  //se convierte a una lista 

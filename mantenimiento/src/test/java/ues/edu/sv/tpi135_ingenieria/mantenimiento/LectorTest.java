@@ -103,10 +103,10 @@ public class LectorTest {
     System.out.println("leerArchivo");
     List<String> listaArchivos = lector.obtenerArchivos(lector.getPath());
     List<List<String>> expResults = new ArrayList<>();
-    expResults.add(lector.separador("shit, the world is already gone"));
-    expResults.add(lector.separador("hola, mundo"));
+    expResults.add(lector.separador("shit, the world is already gone", ","));
+    expResults.add(lector.separador("hola, mundo", ","));
     List<List<String>> expResult = expResults;
-    List<List<String>> result = lector.leerArchivo(listaArchivos);
+    List<List<String>> result = lector.leerArchivo(listaArchivos, ",", false);
     assertEquals(expResult, result);
     // TODO review the generated test code and remove the default call to fail.
     //fail("The test case is a prototype.");
@@ -123,7 +123,7 @@ public class LectorTest {
     expResults.add("hola");
     expResults.add(" mundo");
     ArrayList<String> expResult = expResults;
-    List<String> result = lector.separador(linea);
+    List<String> result = lector.separador(linea, ",");
     assertEquals(expResult, result);
     // TODO review the generated test code and remove the default call to fail.
     //fail("The test case is a prototype.");
