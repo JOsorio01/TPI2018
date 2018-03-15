@@ -1,13 +1,19 @@
 package ues.edu.sv.tpi135_ingenieria.mantenimiento;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Rule;
+import org.junit.rules.TemporaryFolder;
 
 /**
  *
@@ -16,11 +22,16 @@ import static org.junit.Assert.*;
 public class LectorTest {
   
   public LectorTest() {
+    try {
+      this.lector = new Lector(tempFolder.newFile("tempFile.csv").getPath(), ",", false);
+    } catch (IOException ex) {
+      Logger.getLogger(LectorTest.class.getName()).log(Level.SEVERE, null, ex);
+    }
   }
   
   @BeforeClass
   public static void setUpClass() {
-  }
+   }
   
   @AfterClass
   public static void tearDownClass() {
@@ -34,7 +45,10 @@ public class LectorTest {
   public void tearDown() {
   }
   
-  Lector lector = new Lector("/home/airmind", ",");
+  @Rule
+  TemporaryFolder tempFolder = new TemporaryFolder();
+  
+  Lector lector;
   
   /**
    * Test of validarPath method, of class Lector.
