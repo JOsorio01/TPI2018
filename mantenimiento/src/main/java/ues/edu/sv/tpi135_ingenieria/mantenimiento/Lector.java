@@ -13,16 +13,19 @@ import java.util.stream.Stream;
 
 public class Lector implements Serializable {
   private final String separador;
+  private final boolean saltarPrimeraLinea;
   private final String path;
   
   public Lector(String path) {
     this.path = path;
     separador = ",";
+    saltarPrimeraLinea = true;
   }
   
-  public Lector(String path, String separador) {
+  public Lector(String path, String separador, boolean saltarPrimeraLinea) {
     this.path = path;
     this.separador = separador;
+    this.saltarPrimeraLinea = saltarPrimeraLinea;
   }
   
   public String getPath() {
