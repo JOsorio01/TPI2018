@@ -78,8 +78,13 @@ public class Lector implements Serializable {
     List<List<String>> cadena = new ArrayList<>(); //aqui se almacenan los objetos separados por comas de cada linea que contenga el archivo
     listaArchivos.forEach(l -> {
       try {
-        Stream<String> stream = Files.lines(Paths.get(l)); //se obtiene el flujo de datos y se realiza un salto de linea
-        stream.forEach(a -> cadena.add(separador(a)));
+        if(saltarPrimeraLinea) {
+          Stream<String> stream = Files.lines(Paths.get(l)).skip(1); //se obtiene el flujo de datos y se realiza un salto de linea
+          stream.forEach(a -> cadena.add(separador(a)));
+        } else {
+          Stream<String> stream = Files.lines(Paths.get(l)); //se obtiene el flujo de datos y se realiza un salto de linea
+          stream.forEach(a -> cadena.add(separador(a)));
+        }  
       } catch (IOException ex) {
         Logger.getLogger(Lector.class.getName()).log(Level.SEVERE, null, ex);
       }
