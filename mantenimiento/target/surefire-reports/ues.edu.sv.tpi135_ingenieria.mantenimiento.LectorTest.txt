@@ -1,7 +1,20 @@
 -------------------------------------------------------------------------------
 Test set: ues.edu.sv.tpi135_ingenieria.mantenimiento.LectorTest
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.626 sec <<< FAILURE! - in ues.edu.sv.tpi135_ingenieria.mantenimiento.LectorTest
-testObtenerArchivos(ues.edu.sv.tpi135_ingenieria.mantenimiento.LectorTest)  Time elapsed: 0.379 sec  <<< ERROR!
-java.lang.NullPointerException
-	at ues.edu.sv.tpi135_ingenieria.mantenimiento.LectorTest.testObtenerArchivos(LectorTest.java:123)
+Tests run: 5, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 0.81 sec <<< FAILURE! - in ues.edu.sv.tpi135_ingenieria.mantenimiento.LectorTest
+testValidarPath(ues.edu.sv.tpi135_ingenieria.mantenimiento.LectorTest)  Time elapsed: 0.048 sec  <<< FAILURE!
+java.lang.AssertionError: expected:<true> but was:<false>
+	at ues.edu.sv.tpi135_ingenieria.mantenimiento.LectorTest.testValidarPath(LectorTest.java:55)
+
+testLeerArchivo(ues.edu.sv.tpi135_ingenieria.mantenimiento.LectorTest)  Time elapsed: 0.507 sec  <<< FAILURE!
+java.lang.AssertionError: expected:<[[sh*t,  the world is already gone], [hola,  mundo]]> but was:<[]>
+	at ues.edu.sv.tpi135_ingenieria.mantenimiento.LectorTest.testLeerArchivo(LectorTest.java:103)
+
+testValidarPathDirectorio(ues.edu.sv.tpi135_ingenieria.mantenimiento.LectorTest)  Time elapsed: 0.003 sec  <<< FAILURE!
+java.lang.AssertionError: expected:<true> but was:<false>
+	at ues.edu.sv.tpi135_ingenieria.mantenimiento.LectorTest.testValidarPathDirectorio(LectorTest.java:69)
+
+testObtenerArchivos(ues.edu.sv.tpi135_ingenieria.mantenimiento.LectorTest)  Time elapsed: 0.017 sec  <<< FAILURE!
+java.lang.AssertionError: expected:<[/home/airmind/text2.csv, /home/airmind/text.csv]> but was:<[]>
+	at ues.edu.sv.tpi135_ingenieria.mantenimiento.LectorTest.testObtenerArchivos(LectorTest.java:86)
+
