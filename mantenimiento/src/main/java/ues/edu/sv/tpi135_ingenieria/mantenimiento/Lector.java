@@ -19,7 +19,7 @@ public class Lector implements Serializable {
   public Lector(String path) {
     this.path = path;
     separador = ",";
-    saltarPrimeraLinea = true;
+    saltarPrimeraLinea = false;
   }
   
   public Lector(String path, String separador, boolean saltarPrimeraLinea) {
@@ -36,18 +36,18 @@ public class Lector implements Serializable {
     return separador;
   }
   
-  public boolean validarPath(final String path) {
+  public boolean validarPath() {
     if (path != null && !path.trim().isEmpty()) { //verifica que el path no sea nulo ni vacio
       if (Paths.get(path).toFile().isFile()) { //si es un archivo...
         return Paths.get(path).toFile().canRead() && !Paths.get(path).toFile().isHidden();
       } else if (Paths.get(path).toFile().isDirectory()) { //si es un directorio...
-        return validarPathDirectorio(path);
+        return validarPathDirectorio();
       }
     }
     return false;
   }
 
-  public boolean validarPathDirectorio(final String path) {
+  public boolean validarPathDirectorio() {
     if (Paths.get(path).toFile().canRead() && !Paths.get(path).toFile().isHidden()) {
       ArrayList<String> listaArchivosCSV = new ArrayList<>();
       try {
@@ -60,7 +60,7 @@ public class Lector implements Serializable {
     return false;
   }
 
-  public ArrayList<String> obtenerArchivos(final String path) {
+  public ArrayList<String> obtenerArchivos() {
     ArrayList<String> listaArchivosCSV = new ArrayList<>();
     if (Paths.get(path).toFile().isFile()) {
       listaArchivosCSV.add(path);
@@ -74,16 +74,16 @@ public class Lector implements Serializable {
     return listaArchivosCSV;
   }
 
-  public List<List<String>> leerArchivo(List<String> listaArchivos, String separador, boolean saltarPrimeraLineas) {
+  public List<List<String>> leerArchivo(ArrayList<String> listaArchivos) {
     List<List<String>> cadena = new ArrayList<>(); //aqui se almacenan los objetos separados por comas de cada linea que contenga el archivo
     listaArchivos.forEach(l -> {
       try {
         if(saltarPrimeraLinea) {
           Stream<String> stream = Files.lines(Paths.get(l)).skip(1); //se obtiene el flujo de datos y se realiza un salto de linea
-          stream.forEach(a -> cadena.add(separador(a, separador)));
+          stream.forEach(a -> cadena.add(separador(a)));
         } else {
           Stream<String> stream = Files.lines(Paths.get(l)); //se obtiene el flujo de datos y se realiza un salto de linea
-          stream.forEach(a -> cadena.add(separador(a, separador)));
+          stream.forEach(a -> cadena.add(separador(a)));
         }  
       } catch (IOException ex) {
         Logger.getLogger(Lector.class.getName()).log(Level.SEVERE, null, ex);
@@ -93,7 +93,7 @@ public class Lector implements Serializable {
     return cadena;
   }
 
-  public List<String> separador(String linea, String separador) {
+  public List<String> separador(String linea) {
     if (!linea.trim().isEmpty()) {
       String[] separado = linea.split(separador); // separa la linea por comas
       List<String> listaSeparado = new ArrayList<>(Arrays.asList(separado));  //se convierte a una lista 
