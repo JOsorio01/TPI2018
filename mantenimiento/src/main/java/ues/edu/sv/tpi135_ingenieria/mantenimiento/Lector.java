@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ues.edu.sv.tpi135_ingenieria.mantenimiento;
 
 import java.io.File;
@@ -19,33 +14,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 
-/**
- *
- * @author kevin
- */
 public class Lector implements Serializable {
-    
-    private static final Lector instancia = new Lector();
-    
-    public static Lector getInstance(){
-        return instancia;
-    }
-
-     public boolean verificarArchivo(final String path){
-        if(path != null && !path.trim().isEmpty()){
-            //Verifica que el path sea un archivo, tenga permisos de lectura y que no sea oculto
-            return (Paths.get(path).toFile().isFile() && Paths.get(path).toFile().canRead() && !Paths.get(path).toFile().isHidden());
+    public boolean validarPath(final String path){
+        if(path != null && !path.trim().isEmpty()){ //verifica que el path no sea nulo ni vacio
+          if(Paths.get(path).toFile().isFile()) { //si es un archivo...
+            return Paths.get(path).toFile().canRead() && !Paths.get(path).toFile().isHidden();
+          } else if(Paths.get(path).toFile().isDirectory()) { //si es un directorio...
+            return validarPathDirectorio(path);
+          } 
         }
-        
         return false;
     }
     
-    public boolean verificarDirectorio(final String path){
-        if(path != null && !path.trim().isEmpty()){
-            //Verifica que el path sea un directorio, tenga permisos de lectura y que no sea oculto
-            return (Paths.get(path).toFile().isDirectory() && Paths.get(path).toFile().canRead() && !Paths.get(path).toFile().isHidden());
-        }
-        return false;
+    public boolean validarPathDirectorio(final String path){
+      ArrayList<String> listaArchivosCSV = new ArrayList<String>();
+      
+      return Paths.get(path).toFile().canRead() && !Paths.get(path).toFile().isHidden();
     }
     
     public List<String> obtenerArchivos(final String path){
