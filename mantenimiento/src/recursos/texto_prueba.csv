@@ -1,0 +1,3 @@
+id_mantenimiento,historico,n_inventario,marca,n_serie,modelo,responsble,sistema_operativo,version,observaciones
+1;HP1,12040.3334.080.0017;Lenovo;MJVZLKF;ThinkCentre M82;Lic Rina de Zometa;Windows,7.0 Professional SP 64 bits,office pirata
+2,HP2,12040.3334.080.0008,Dell,551LHY,Vostron 220,Lic Rina de Zometa,Windows,7.0 Professional SP 64 bits,Office Original
