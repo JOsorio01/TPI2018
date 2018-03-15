@@ -15,6 +15,11 @@ public class Lector implements Serializable {
   private final String separador;
   private final String path;
   
+  public Lector(String path) {
+    this.path = path;
+    separador = ",";
+  }
+  
   public Lector(String path, String separador) {
     this.path = path;
     this.separador = separador;
